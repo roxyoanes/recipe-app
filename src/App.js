@@ -9,8 +9,9 @@ const App = () => {
   const [toggle, setToggle] = React.useState(false);
   const [recipeName, setRecipeName] = React.useState([]);
   const [ingredients, setIngredients] = React.useState([]);
+  const [error, setError] = React.useState(null);
 
-  React.useEffect(() => {
+  const handleSearch = () => {
     if(recipeName && ingredients){
       recipeApi(recipeName && ingredients).then(data => {
         setRecipeName(data)
@@ -20,23 +21,30 @@ const App = () => {
       setRecipeName([]);
       setIngredients([]);
     }
-  }, [recipeName, ingredients])
+  }
 
 const toggleComponents = () => {
     setToggle(!toggle)
 } 
-  return (
-    <div className="App">
-        <p>
-          Search recipe
-        </p>
-        <div className="btn-container">
-        <button className="toggle-btn" onClick={toggleComponents}>switch</button>
-        {toggle ? <RecipeList /> : <Search />}
-        </div>
-        
-    </div>
-  );
+  if(error){
+    return <p>{error}</p>
+  } else if(recipeName && ingredients){
+    return (
+      <div className="App">
+          <p>
+            Search recipe
+          </p>
+          <div className="btn-container">
+          <button className="toggle-btn" onClick={toggleComponents}>switch</button>
+          {toggle ? <RecipeList /> : <Search recipeName={recipeName} ingredients={ingredients} />}
+          </div>
+          
+      </div>
+    );
+  } else{
+    return <p>Loading</p>
+  }
+  
 }
 
 export default App;

@@ -1,9 +1,11 @@
 import React from "react";
 
 const Search = () => {
+
   return(
   <div>
     <p>salut</p>
+    <input type="text" />
     <input type="text" />
   </div>
   )
