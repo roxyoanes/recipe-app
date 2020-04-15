@@ -7,24 +7,24 @@ import './App.css';
 
 const App = () => {
   const [toggle, setToggle] = React.useState(false);
-  const [name, setName] = React.useState("");
+  const [recipeName, setRecipeName] = React.useState("");
   const [ingredients, setIngredients] = React.useState([]);
   const [error, setError] = React.useState(null);
 
   const handleSearch = () => {
-    if(name && ingredients){
-      recipeApi(name && ingredients).then(data => {
-        setName(data)
+    if(recipeName && ingredients){
+      recipeApi(recipeName && ingredients).then(data => {
+        setRecipeName(data)
         setIngredients(data)
       })
     } else{
-      setName([]);
+      setRecipeName([]);
       setIngredients([]);
     }
   }
 
-  const handleChange = (e) => {
-    setName(e.target.value)
+  const handleRecipeName = (e) => {
+    setRecipeName(e.target.value)
   }  
 
   const toggleComponents = () => {
@@ -33,7 +33,7 @@ const App = () => {
 
   const searchRecipe = () => {
     recipeApi().then(data =>{
-      setName(data)
+      setRecipeName(data)
       setIngredients(data)
     });
   }
@@ -48,7 +48,7 @@ const App = () => {
           </p>
           <div className="btn-container">
           <button className="toggle-btn" onClick={toggleComponents}>switch</button>
-          {toggle ? <RecipeList /> : <Search name={name} ingredients={ingredients} handleSearch={handleSearch} handleChange={handleChange} searchRecipe={searchRecipe} />}
+          {toggle ? <RecipeList /> : <Search recipeName={recipeName} ingredients={ingredients} handleSearch={handleSearch} handleRecipeName={handleRecipeName} searchRecipe={searchRecipe} />}
           </div>
           
       </div>
