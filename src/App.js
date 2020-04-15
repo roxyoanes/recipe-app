@@ -8,19 +8,19 @@ import './App.css';
 const App = () => {
   const [toggle, setToggle] = React.useState(false);
   const [recipeName, setRecipeName] = React.useState("");
+  const [inputValue, setInputValue] = React.useState("");
   const [ingredients, setIngredients] = React.useState([]);
-  const [searchedIngredients, setSearchedIngredients] = React.useState([]);
   const [error, setError] = React.useState(null);
 
   const handleSearch = () => {
-    if(recipeName && ingredients){
-      recipeApi(recipeName, ingredients).then(data => {
+    if(recipeName && inputValue){
+      recipeApi(recipeName, inputValue).then(data => {
         setRecipeName(data)
-        setIngredients(data)
+        setInputValue(data)
       })
     } else{
       setRecipeName([]);
-      setIngredients([]);
+      setInputValue([]);
     }
   }
 
@@ -28,8 +28,8 @@ const App = () => {
     setRecipeName(e.target.value)
   }
 
-  const handleIngredients = (e) => {
-    setIngredients(e.target.value)
+  const handleInput = (e) => {
+    setInputValue(e.target.value)
   }  
 
   const toggleComponents = () => {
@@ -38,10 +38,10 @@ const App = () => {
 
   const keyPress = (e) => {
     if(e.keyCode === 13){
+      setIngredients([...ingredients, e.target.value])
        console.log('value', e.target.value);
     }
   }
-
 
   if(error){
     return <p>{error}</p>
@@ -56,11 +56,13 @@ const App = () => {
           {toggle ? <RecipeList /> : 
             <Search
               recipeName={recipeName}
-              ingredients={ingredients}
+              inputValue={inputValue}
               handleSearch={handleSearch}
               handleRecipeName={handleRecipeName}
-              handleIngredients={handleIngredients}
+              handleInput={handleInput}
               keyPress={keyPress}
+              setIngredients={setIngredients}
+              ingredients={ingredients}
             />
           }
           </div>
