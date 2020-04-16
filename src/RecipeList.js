@@ -5,8 +5,9 @@ const RecipeList = ({result}) => {
   <div>
         <div>
           {result.map((recipe) => (
-            <div>
-              <p key={recipe}>{recipe.title}</p>
+            <div className="recipe-container">
+              <h4 key={recipe}>{recipe.title}</h4>
+              <p>{recipe.ingredients}</p>
             </div>
           ))}
         </div>

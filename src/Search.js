@@ -6,14 +6,15 @@ const Search = ({
   recipeName,
   inputValue,
   keyPress,
-  setIngredients,
   ingredients,
   deleteIngredient,
 }) => {
   return (
     <div>
       <div className="search-container">
+        <h4>Recipe name</h4>
         <input type="text" onChange={handleRecipeName} value={recipeName} />
+        <h4>Ingredients:</h4>
         <input
           type="text"
           onChange={handleInput}
@@ -22,9 +23,9 @@ const Search = ({
         />
         <div>
           {ingredients.map((ingredient) => (
-            <div>
+            <div className="ingredient-container">
               <li key={ingredient}>{ingredient}</li>
-              <button onClick={() => deleteIngredient(ingredient)}>
+              <button className="delete-btn" onClick={() => deleteIngredient(ingredient)}>
                 Delete ingredient
               </button>
             </div>

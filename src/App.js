@@ -50,11 +50,8 @@ const App = () => {
   }
   return (
     <div className="App">
-      <p>Search recipe</p>
+      <p>Search recipe:</p>
       <div className="btn-container">
-        <button className="toggle-btn" onClick={handleSearch}>
-          Search recipe
-        </button>
         {toggle ? (
           <RecipeList 
             result={result}
@@ -72,6 +69,11 @@ const App = () => {
             deleteIngredient={deleteIngredient}
           />
         )}
+        <div className="search-btn-container">
+          <button className="toggle-btn" onClick={handleSearch}>
+            Search recipe
+          </button>
+        </div>
       </div>
     </div>
   );
