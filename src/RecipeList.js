@@ -1,10 +1,16 @@
 import React from "react";
 
-const RecipeList = () => {
+const RecipeList = ({result}) => {
   return(
   <div>
-    <p>hey</p>
-  </div>
+        <div>
+          {result.map((recipe) => (
+            <div>
+              <p key={recipe}>{recipe.title}</p>
+            </div>
+          ))}
+        </div>
+    </div>
   )
   
 }
