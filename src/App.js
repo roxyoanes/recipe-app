@@ -10,18 +10,19 @@ const App = () => {
   const [recipeName, setRecipeName] = React.useState("");
   const [inputValue, setInputValue] = React.useState("");
   const [ingredients, setIngredients] = React.useState([]);
+  const [result, setResult] = React.useState([]);
   const [error, setError] = React.useState(null);
 
   const handleSearch = () => {
     if (recipeName && inputValue) {
       recipeApi(recipeName, inputValue).then((data) => {
-        setRecipeName(data);
-        setInputValue(data);
+        setResult(data.results)
       });
-    } else {
-      setRecipeName([]);
-      setInputValue([]);
+    } else{
+      setResult([]);
     }
+
+    setToggle(!toggle);
   };
 
   const handleRecipeName = (e) => {
@@ -30,10 +31,6 @@ const App = () => {
 
   const handleInput = (e) => {
     setInputValue(e.target.value);
-  };
-
-  const toggleComponents = () => {
-    setToggle(!toggle);
   };
 
   const keyPress = (e) => {
@@ -55,11 +52,13 @@ const App = () => {
     <div className="App">
       <p>Search recipe</p>
       <div className="btn-container">
-        <button className="toggle-btn" onClick={toggleComponents}>
-          switch
+        <button className="toggle-btn" onClick={handleSearch}>
+          Search recipe
         </button>
         {toggle ? (
-          <RecipeList />
+          <RecipeList 
+            result={result}
+          />
         ) : (
           <Search
             recipeName={recipeName}

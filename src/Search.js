@@ -1,7 +1,6 @@
 import React from "react";
 
 const Search = ({
-  handleSearch,
   handleRecipeName,
   handleInput,
   recipeName,
@@ -13,7 +12,6 @@ const Search = ({
 }) => {
   return (
     <div>
-      <p>salut</p>
       <div className="search-container">
         <input type="text" onChange={handleRecipeName} value={recipeName} />
         <input
@@ -32,9 +30,6 @@ const Search = ({
             </div>
           ))}
         </div>
-        <button className="search-btn" onClick={handleSearch}>
-          Search
-        </button>
       </div>
     </div>
   );
